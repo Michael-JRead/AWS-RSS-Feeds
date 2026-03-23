@@ -12,7 +12,7 @@ import streamlit as st
 from aws_services import AWS_SERVICES, CATEGORIES, SERVICE_NAMES
 from config import load_config, save_config, update_config
 from rss_scraper import scrape_services, total_item_count
-from email_sender import build_html_email, send_email, build_subject, test_smtp_connection, open_in_outlook
+from email_sender import build_html_email, send_email, build_subject, test_smtp_connection, open_in_outlook, build_teams_message
 from scheduler import apply_schedule, get_next_run, start_scheduler, get_scheduler
 
 # ---------------------------------------------------------------------------
@@ -745,6 +745,22 @@ If MFA is enabled, create an App Password in Microsoft account security settings
                             if item["summary"]:
                                 st.caption(item["summary"][:300])
                             st.divider()
+
+    # ── Teams message ─────────────────────────────────────────────────────
+    if "preview_results" in st.session_state and st.session_state["preview_results"]:
+        with st.expander("💬 Copy Teams Message", expanded=False):
+            st.markdown(
+                '<div class="callout-tip">'
+                '📋 Paste this directly into a <strong>Microsoft Teams</strong> channel. '
+                'Teams renders the bold text, links, and emoji automatically.'
+                '</div>',
+                unsafe_allow_html=True,
+            )
+            teams_msg = build_teams_message(
+                st.session_state["preview_results"],
+                cfg.get("days_back", 7),
+            )
+            st.code(teams_msg, language=None)
 
     # ── Test email ────────────────────────────────────────────────────────
     with st.expander("📮 Send a test email (SMTP only)"):
