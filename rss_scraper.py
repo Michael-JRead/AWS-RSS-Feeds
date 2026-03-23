@@ -45,19 +45,37 @@ def _make_item(entry: Any, source_url: str) -> dict:
     # Extract "general:products/{service-id}" category tags — AWS's authoritative
     # service identifiers. Each What's New item is tagged with exactly the service(s)
     # an announcement relates to, enabling precise filtering without title guessing.
+    #
+    # AWS RSS category tags can appear in several formats:
+    #   Format A: scheme="general:products", term="amazon-ec2"
+    #   Format B: term="general:products/amazon-ec2"  (no scheme)
+    #   Format C: term="general:products/amazon-msk,marketing:marchitecture/analytics"
+    #             (comma-separated list — multiple namespaces in one tag)
+    # We split each term by comma and process every part individually.
     product_ids: list[str] = []
     if hasattr(entry, "tags") and entry.tags:
         for tag in entry.tags:
-            term   = (getattr(tag, "term",   "") or "").strip()
-            scheme = (getattr(tag, "scheme", "") or "").strip()
-            # Format A: scheme="general:products", term="amazon-ec2"
-            if scheme == "general:products" and term:
-                product_ids.append(term.lower())
-            # Format B: term="general:products/amazon-ec2", scheme=None/empty
-            elif "general:products/" in term:
-                pid = term.split("general:products/")[-1].strip().lower()
-                if pid:
-                    product_ids.append(pid)
+            raw_term = (getattr(tag, "term",   "") or "").strip()
+            scheme   = (getattr(tag, "scheme", "") or "").strip()
+
+            for part in raw_term.split(","):
+                part = part.strip()
+                if not part:
+                    continue
+
+                if scheme == "general:products":
+                    # Format A: scheme carries the namespace; part is the product ID
+                    # (may include a path component — take the last segment)
+                    pid = part.split("/")[-1].lower().strip()
+                    if pid and ":" not in pid and pid not in product_ids:
+                        product_ids.append(pid)
+                elif "general:products/" in part:
+                    # Format B/C: full URI in the term, e.g. "general:products/amazon-msk"
+                    pid = part.split("general:products/")[-1].lower().strip()
+                    # Remove any trailing slash-separated sub-path (defensive)
+                    pid = pid.split("/")[0].strip()
+                    if pid and ":" not in pid and pid not in product_ids:
+                        product_ids.append(pid)
 
     return {
         "title":       getattr(entry, "title", "No Title").strip(),
@@ -286,6 +304,25 @@ def scrape_services(
                     raw = matched_tagged + matched_untagged
             else:
                 raw = fetch_feed(feed_url)
+                # Blog feeds (e.g. big-data, compute, security) are CATEGORY blogs —
+                # they cover many services, not just the one selected. Apply the same
+                # two-layer filter so only relevant posts appear.
+                # "All Services" / "All" entries are deliberately left unfiltered.
+                if service["name"] not in ("What's New (All Services)", "AWS News Blog (All)"):
+                    candidate_ids: set[str] = set(service.get("product_ids", []))
+                    candidate_ids.update(_derive_product_ids(service["name"]))
+
+                    tagged_b   = [i for i in raw if i["product_ids"]]
+                    untagged_b = [i for i in raw if not i["product_ids"]]
+
+                    matched_b_tagged = [
+                        i for i in tagged_b
+                        if set(i["product_ids"]) & candidate_ids
+                    ]
+                    name_terms_b = _derive_name_terms(service["name"])
+                    matched_b_untagged = filter_by_keywords(untagged_b, name_terms_b)
+
+                    raw = matched_b_tagged + matched_b_untagged
 
             for item in raw:
                 if item["guid"] not in seen_guids and _within_window(item, cutoff):
