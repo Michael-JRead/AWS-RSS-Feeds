@@ -246,6 +246,11 @@ def open_in_outlook(html_body: str, recipients: list[str], subject: str) -> None
     Requires Microsoft Outlook to be installed and pywin32 (pip install pywin32).
     Opens the draft for the user to review — does NOT send automatically.
 
+    COM must be initialised on every thread that uses it. Streamlit runs button
+    callbacks on background threads, so we call CoInitialize/CoUninitialize
+    explicitly to avoid the "CoInitialize has not been called" error on repeated
+    button clicks.
+
     Args:
         html_body:  Full HTML string for the email body.
         recipients: List of recipient email addresses.
@@ -257,17 +262,24 @@ def open_in_outlook(html_body: str, recipients: list[str], subject: str) -> None
     """
     try:
         import win32com.client  # type: ignore
+        import pythoncom        # type: ignore  (bundled with pywin32)
     except ImportError:
         raise RuntimeError(
             "pywin32 is not installed. Run: pip install pywin32"
         )
 
-    outlook = win32com.client.Dispatch("Outlook.Application")
-    mail = outlook.CreateItem(0)       # 0 = olMailItem
-    mail.Subject = subject
-    mail.HTMLBody = html_body
-    mail.To = "; ".join(recipients)
-    mail.Display(False)                # False = non-modal, keeps Outlook visible
+    # Initialise COM on the current thread (safe to call even if already initialised)
+    pythoncom.CoInitialize()
+    try:
+        outlook = win32com.client.Dispatch("Outlook.Application")
+        mail = outlook.CreateItem(0)       # 0 = olMailItem
+        mail.Subject = subject
+        mail.HTMLBody = html_body
+        mail.To = "; ".join(recipients)
+        mail.Display(False)                # False = non-modal, keeps Outlook visible
+    finally:
+        # Always uninitialise so the thread's COM state is clean for future calls
+        pythoncom.CoUninitialize()
 
 
 def test_smtp_connection(smtp_config: dict) -> tuple[bool, str]:
