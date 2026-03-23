@@ -106,6 +106,9 @@ def _make_trigger(schedule_cfg: dict) -> CronTrigger:
         }
         dow = day_map.get(schedule_cfg.get("day_of_week", "monday").lower(), "mon")
         return CronTrigger(day_of_week=dow, hour=hour, minute=minute)
+    elif schedule_cfg.get("frequency") == "monthly":
+        day_of_month = schedule_cfg.get("day_of_month", 1)
+        return CronTrigger(day=day_of_month, hour=hour, minute=minute)
     else:
         # daily
         return CronTrigger(hour=hour, minute=minute)

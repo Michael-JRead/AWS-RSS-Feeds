@@ -25,7 +25,9 @@
       "Bash(curl -s https://aws.amazon.com/about-aws/whats-new/recent/feed/)",
       "Bash(python3:*)",
       "WebFetch(domain:feedparser.readthedocs.io)",
-      "WebFetch(domain:pythonhosted.org)"
+      "WebFetch(domain:pythonhosted.org)",
+      "Bash(python -c \"import ast; ast.parse\\(open\\(''app.py''\\).read\\(\\)\\); print\\(''OK''\\)\")",
+      "Bash(python -c \"import ast; ast.parse\\(open\\(''app.py'', encoding=''utf-8''\\).read\\(\\)\\); print\\(''OK''\\)\")"
     ]
   }
 }
