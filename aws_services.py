@@ -363,6 +363,7 @@ AWS_SERVICES = [
     {
         "name": "Keyspaces (for Apache Cassandra)",
         "category": "Database",
+        "product_ids": ["amazon-keyspaces"],   # override: paren "(for Apache Cassandra)" is not a brand name
         "keywords": ["amazon keyspaces", "keyspaces", "cassandra"],
         "feeds": [
             "https://aws.amazon.com/blogs/database/feed/",
@@ -747,6 +748,7 @@ AWS_SERVICES = [
     {
         "name": "Q (Amazon Q)",
         "category": "ML & AI",
+        "product_ids": ["amazon-q"],   # override: bare slug "q" is too short/ambiguous
         "keywords": ["amazon q", "amazon q developer", "amazon q business", "amazon q in quicksight"],
         "feeds": [
             "https://aws.amazon.com/blogs/machine-learning/feed/",
@@ -968,6 +970,7 @@ AWS_SERVICES = [
     {
         "name": "OpenSearch Service",
         "category": "Analytics",
+        "product_ids": ["amazon-opensearch-service"],   # override: no "Amazon" prefix in display name
         "keywords": ["amazon opensearch", "opensearch service", "elasticsearch", "opensearch serverless"],
         "feeds": [
             "https://aws.amazon.com/blogs/big-data/feed/",
@@ -2130,6 +2133,7 @@ AWS_SERVICES = [
     {
         "name": "Managed Grafana",
         "category": "Management & Governance",
+        "product_ids": ["amazon-managed-grafana"],   # override: "Managed" is not an AWS brand prefix
         "keywords": ["amazon managed grafana", "managed grafana", "grafana", "grafana workspace"],
         "feeds": [
             "https://aws.amazon.com/blogs/mt/feed/",
@@ -2139,6 +2143,7 @@ AWS_SERVICES = [
     {
         "name": "Managed Service for Prometheus",
         "category": "Management & Governance",
+        "product_ids": ["amazon-managed-service-for-prometheus"],   # override: no AWS brand prefix in display name
         "keywords": ["amazon managed service for prometheus", "amazon prometheus", "managed prometheus", "amp"],
         "feeds": [
             "https://aws.amazon.com/blogs/mt/feed/",
@@ -2168,6 +2173,7 @@ AWS_SERVICES = [
     {
         "name": "Timestream for InfluxDB",
         "category": "Database",
+        "product_ids": ["amazon-timestream-for-influxdb", "amazon-timestream"],   # both variants
         "keywords": ["amazon timestream for influxdb", "timestream influxdb", "managed influxdb"],
         "feeds": [
             "https://aws.amazon.com/blogs/database/feed/",

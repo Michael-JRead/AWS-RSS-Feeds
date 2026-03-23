@@ -19,7 +19,13 @@
       "Bash(\"C:\\\\Program Files\\\\Git\\\\mingw64\\\\bin\\\\openssl.exe\" req -x509 -newkey rsa:4096 -keyout \"C:\\\\Users\\\\mjrma\\\\OneDrive\\\\Documents\\\\Github Repos\\\\AWS RSS Feeds\\\\.streamlit\\\\localhost.key\" -out \"C:\\\\Users\\\\mjrma\\\\OneDrive\\\\Documents\\\\Github Repos\\\\AWS RSS Feeds\\\\.streamlit\\\\localhost.crt\" -days 3650 -nodes -subj \"/C=US/ST=Local/L=Local/O=AWSRSSDigest/CN=localhost\" -addext \"subjectAltName=DNS:localhost,IP:127.0.0.1\")",
       "Bash($env:PATH = \"C:\\\\Program Files\\\\Git\\\\mingw64\\\\bin;\" + $env:PATH)",
       "Bash(openssl req:*)",
-      "Bash(1:*)"
+      "Bash(1:*)",
+      "Bash(curl -s \"https://aws.amazon.com/about-aws/whats-new/recent/feed/\")",
+      "Bash(curl -s \"https://aws.amazon.com/blogs/aws/feed/\")",
+      "Bash(curl -s https://aws.amazon.com/about-aws/whats-new/recent/feed/)",
+      "Bash(python3:*)",
+      "WebFetch(domain:feedparser.readthedocs.io)",
+      "WebFetch(domain:pythonhosted.org)"
     ]
   }
 }

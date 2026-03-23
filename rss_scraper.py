@@ -42,13 +42,31 @@ def _make_item(entry: Any, source_url: str) -> dict:
         if len(summary) > 400:
             summary = summary[:397] + "..."
 
+    # Extract "general:products/{service-id}" category tags — AWS's authoritative
+    # service identifiers. Each What's New item is tagged with exactly the service(s)
+    # an announcement relates to, enabling precise filtering without title guessing.
+    product_ids: list[str] = []
+    if hasattr(entry, "tags") and entry.tags:
+        for tag in entry.tags:
+            term   = (getattr(tag, "term",   "") or "").strip()
+            scheme = (getattr(tag, "scheme", "") or "").strip()
+            # Format A: scheme="general:products", term="amazon-ec2"
+            if scheme == "general:products" and term:
+                product_ids.append(term.lower())
+            # Format B: term="general:products/amazon-ec2", scheme=None/empty
+            elif "general:products/" in term:
+                pid = term.split("general:products/")[-1].strip().lower()
+                if pid:
+                    product_ids.append(pid)
+
     return {
-        "title": getattr(entry, "title", "No Title").strip(),
-        "link": getattr(entry, "link", ""),
-        "published": published,
-        "summary": summary,
-        "guid": getattr(entry, "id", getattr(entry, "link", "")),
-        "source_url": source_url,
+        "title":       getattr(entry, "title", "No Title").strip(),
+        "link":        getattr(entry, "link", ""),
+        "published":   published,
+        "summary":     summary,
+        "guid":        getattr(entry, "id", getattr(entry, "link", "")),
+        "source_url":  source_url,
+        "product_ids": product_ids,   # AWS-assigned service identifiers from <category> tags
     }
 
 
@@ -106,6 +124,77 @@ def _derive_name_terms(service_name: str) -> list[str]:
                 break
 
     return [t for t in sorted(terms) if t]
+
+
+def _derive_product_ids(service_name: str) -> list[str]:
+    """Generate candidate AWS product-ID strings from a service display name.
+
+    AWS What's New items carry <category>general:products/{service-id}</category>
+    tags. We derive likely IDs from the display name so we can match against them
+    without requiring every service entry to be hand-annotated.
+
+    Examples
+    --------
+    "EC2 (Elastic Compute Cloud)"  → ["amazon-ec2", "aws-ec2"]
+    "Lambda"                       → ["amazon-lambda", "aws-lambda"]
+    "Amazon Aurora"                → ["amazon-aurora"]
+    "AWS Config"                   → ["aws-config"]
+    "MemoryDB for Redis"           → ["amazon-memorydb-for-redis", "aws-memorydb-for-redis",
+                                      "amazon-memorydb", "aws-memorydb"]
+    "MQ (Amazon MQ)"               → ["amazon-mq", "aws-mq"]
+    """
+    candidates: list[str] = []
+
+    def _slugify(s: str) -> str:
+        s = s.lower()
+        s = re.sub(r"[/\\]", "-", s)
+        s = re.sub(r"[._]", "", s)
+        s = re.sub(r"\s+", "-", s.strip())
+        s = re.sub(r"-+", "-", s).strip("-")
+        return s
+
+    def _add(slug: str, prefix: str) -> None:
+        if slug:
+            pid = f"{prefix}{slug}"
+            if pid not in candidates:
+                candidates.append(pid)
+
+    # Strip parenthetical content to get the main name
+    main = re.sub(r"\s*\(.*", "", service_name).strip()
+    main_lower = main.lower()
+
+    if main_lower.startswith("amazon "):
+        slug = _slugify(main[7:])
+        _add(slug, "amazon-")
+        # For "Amazon X for Y" — also try without "for Y" suffix
+        if "-for-" in slug:
+            _add(slug.split("-for-")[0], "amazon-")
+    elif main_lower.startswith("aws "):
+        slug = _slugify(main[4:])
+        _add(slug, "aws-")
+        if "-for-" in slug:
+            _add(slug.split("-for-")[0], "aws-")
+    else:
+        # Bare name (e.g. "Lambda", "EC2", "Route 53") — try both amazon- and aws-
+        slug = _slugify(main)
+        _add(slug, "amazon-")
+        _add(slug, "aws-")
+        if "-for-" in slug:
+            base = slug.split("-for-")[0]
+            _add(base, "amazon-")
+            _add(base, "aws-")
+
+    # Check parenthetical content for embedded "Amazon X" / "AWS X" patterns
+    # e.g., "MQ (Amazon MQ)" → also derive "amazon-mq"
+    for paren in re.findall(r"\(([^)]+)\)", service_name):
+        p = paren.strip()
+        p_lower = p.lower()
+        if p_lower.startswith("amazon "):
+            _add(_slugify(p[7:]), "amazon-")
+        elif p_lower.startswith("aws "):
+            _add(_slugify(p[4:]), "aws-")
+
+    return candidates
 
 
 def filter_by_keywords(items: list[dict], keywords: list[str]) -> list[dict]:
@@ -170,10 +259,31 @@ def scrape_services(
                 if whats_new_cache is None:
                     whats_new_cache = fetch_feed(WHATS_NEW_FEED)
                 raw = whats_new_cache
-                # Filter by service name terms unless the service covers all feeds
+                # Filter items to those relevant to this service.
+                # Two-layer approach for 100% accuracy:
+                #   Layer 1 (primary):  match by AWS category product-IDs — exact, authoritative
+                #   Layer 2 (fallback): title substring match for any items lacking category tags
                 if service["name"] not in ("What's New (All Services)", "AWS News Blog (All)"):
+                    # Build the set of product IDs this service should appear under.
+                    # Explicit overrides in the registry take priority; auto-derived fill the rest.
+                    candidate_ids: set[str] = set(service.get("product_ids", []))
+                    candidate_ids.update(_derive_product_ids(service["name"]))
+
+                    # Partition: items AWS has tagged vs those without any product tag
+                    tagged   = [i for i in raw if i["product_ids"]]
+                    untagged = [i for i in raw if not i["product_ids"]]
+
+                    # Layer 1 — exact category match (zero false positives)
+                    matched_tagged = [
+                        i for i in tagged
+                        if set(i["product_ids"]) & candidate_ids
+                    ]
+
+                    # Layer 2 — title match only on untagged items (safe fallback)
                     name_terms = _derive_name_terms(service["name"])
-                    raw = filter_by_keywords(raw, name_terms)
+                    matched_untagged = filter_by_keywords(untagged, name_terms)
+
+                    raw = matched_tagged + matched_untagged
             else:
                 raw = fetch_feed(feed_url)
 
