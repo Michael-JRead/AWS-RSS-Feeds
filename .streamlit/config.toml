@@ -1,0 +1,7 @@
+[server]
+sslCertFile = ".streamlit/localhost.crt"
+sslKeyFile  = ".streamlit/localhost.key"
+port        = 8501
+
+[browser]
+gatherUsageStats = false

@@ -893,7 +893,7 @@ AWS_SERVICES = [
     },
     {
         "name": "HealthLake",
-        "category": "ML & AI",
+        "category": "Healthcare",
         "keywords": ["amazon healthlake", "healthlake", "fhir", "health data"],
         "feeds": [WHATS_NEW_FEED],
     },
@@ -1683,6 +1683,851 @@ AWS_SERVICES = [
         "category": "Open Source",
         "keywords": ["open source", "opensource", "aws open source"],
         "feeds": ["https://aws.amazon.com/blogs/opensource/feed/"],
+    },
+
+    # ── Analytics (additional) ────────────────────────────────────────────────
+    {
+        "name": "FinSpace",
+        "category": "Analytics",
+        "keywords": ["amazon finspace", "finspace", "financial analytics", "capital markets data"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "CloudSearch",
+        "category": "Analytics",
+        "keywords": ["amazon cloudsearch", "cloudsearch"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "Glue DataBrew",
+        "category": "Analytics",
+        "keywords": ["aws glue databrew", "glue databrew", "databrew", "visual data preparation"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Kinesis Video Streams",
+        "category": "Analytics",
+        "keywords": ["kinesis video streams", "amazon kinesis video", "video stream ingestion"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "DataZone",
+        "category": "Analytics",
+        "keywords": ["amazon datazone", "datazone", "data catalog governance", "data mesh"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "OpenSearch Ingestion",
+        "category": "Analytics",
+        "keywords": ["amazon opensearch ingestion", "opensearch ingestion", "data prepper"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Clean Rooms ML",
+        "category": "Analytics",
+        "keywords": ["aws clean rooms ml", "clean rooms ml", "collaborative ml"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "EMR Serverless",
+        "category": "Analytics",
+        "keywords": ["amazon emr serverless", "emr serverless"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Compute (additional) ──────────────────────────────────────────────────
+    {
+        "name": "ParallelCluster",
+        "category": "Compute",
+        "keywords": ["aws parallelcluster", "parallelcluster", "hpc cluster", "high performance computing"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/hpc/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "HPC (High Performance Computing)",
+        "category": "Compute",
+        "keywords": ["hpc", "high performance computing", "aws hpc", "supercomputing"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/hpc/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "EC2 Capacity Blocks",
+        "category": "Compute",
+        "keywords": ["ec2 capacity blocks", "capacity blocks", "gpu capacity reservation"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/compute/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Application Integration (additional) ──────────────────────────────────
+    {
+        "name": "EventBridge Scheduler",
+        "category": "Application Integration",
+        "keywords": ["amazon eventbridge scheduler", "eventbridge scheduler", "scheduled events", "scheduled rules"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "EventBridge Pipes",
+        "category": "Application Integration",
+        "keywords": ["amazon eventbridge pipes", "eventbridge pipes", "event-driven integration"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "MWAA (Managed Workflows for Apache Airflow)",
+        "category": "Application Integration",
+        "keywords": ["amazon mwaa", "managed workflows for apache airflow", "apache airflow", "mwaa"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/compute/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SWF (Simple Workflow Service)",
+        "category": "Application Integration",
+        "keywords": ["amazon swf", "simple workflow service", "amazon swf workflow"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── ML & AI (additional) ──────────────────────────────────────────────────
+    {
+        "name": "DevOps Guru",
+        "category": "ML & AI",
+        "keywords": ["amazon devops guru", "devops guru", "ml-powered devops", "operational insights"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Bedrock AgentCore",
+        "category": "ML & AI",
+        "keywords": ["amazon bedrock agentcore", "bedrock agentcore", "agentcore", "ai agent runtime"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Q Business",
+        "category": "ML & AI",
+        "keywords": ["amazon q business", "q business", "q for business", "enterprise ai assistant"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SageMaker Canvas",
+        "category": "ML & AI",
+        "keywords": ["amazon sagemaker canvas", "sagemaker canvas", "no-code ml", "no code machine learning"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SageMaker JumpStart",
+        "category": "ML & AI",
+        "keywords": ["amazon sagemaker jumpstart", "sagemaker jumpstart", "foundation models", "pretrained models"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SageMaker Ground Truth",
+        "category": "ML & AI",
+        "keywords": ["sagemaker ground truth", "ground truth", "data labeling", "training data labeling"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Comprehend Medical",
+        "category": "ML & AI",
+        "keywords": ["amazon comprehend medical", "comprehend medical", "medical nlp", "clinical text"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Transcribe Medical",
+        "category": "ML & AI",
+        "keywords": ["amazon transcribe medical", "transcribe medical", "medical transcription", "clinical speech"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Rekognition Custom Labels",
+        "category": "ML & AI",
+        "keywords": ["amazon rekognition custom labels", "rekognition custom labels", "custom image classification"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "DeepComposer",
+        "category": "ML & AI",
+        "keywords": ["aws deepcomposer", "deepcomposer", "generative music ai"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── Healthcare & Life Sciences ─────────────────────────────────────────────
+    {
+        "name": "HealthImaging",
+        "category": "Healthcare",
+        "keywords": ["aws healthimaging", "healthimaging", "medical imaging", "dicom cloud"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/industries/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "HealthOmics",
+        "category": "Healthcare",
+        "keywords": ["aws healthomics", "healthomics", "amazon omics", "genomics", "bioinformatics", "omics data"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/industries/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "HealthScribe",
+        "category": "Healthcare",
+        "keywords": ["aws healthscribe", "healthscribe", "clinical documentation", "ambient clinical intelligence"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/industries/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Security & Identity (additional) ──────────────────────────────────────
+    {
+        "name": "Signer",
+        "category": "Security",
+        "keywords": ["aws signer", "code signing", "container image signing"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "Payment Cryptography",
+        "category": "Security",
+        "keywords": ["aws payment cryptography", "payment cryptography", "payment hsm", "payment key management"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "Security Token Service (STS)",
+        "category": "Security",
+        "keywords": ["aws sts", "security token service", "temporary credentials", "assume role"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "One Enterprise",
+        "category": "Security",
+        "keywords": ["amazon one enterprise", "one enterprise", "palm recognition", "biometric authentication"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── Management & Governance (additional) ──────────────────────────────────
+    {
+        "name": "Resource Explorer",
+        "category": "Management & Governance",
+        "keywords": ["aws resource explorer", "resource explorer", "resource search", "cross-region resource search"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "AppConfig",
+        "category": "Management & Governance",
+        "keywords": ["aws appconfig", "appconfig", "application configuration", "feature flags", "feature toggles"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "Application Auto Scaling",
+        "category": "Management & Governance",
+        "keywords": ["aws application auto scaling", "application auto scaling", "auto scaling policy"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "Service Quotas",
+        "category": "Management & Governance",
+        "keywords": ["aws service quotas", "service quotas", "service limits", "limit increase"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "Cost Anomaly Detection",
+        "category": "Management & Governance",
+        "keywords": ["aws cost anomaly detection", "cost anomaly detection", "cost anomaly", "spending alerts"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "Billing Conductor",
+        "category": "Management & Governance",
+        "keywords": ["aws billing conductor", "billing conductor", "custom billing", "billing groups"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "re:Post",
+        "category": "Management & Governance",
+        "keywords": ["aws re:post", "repost", "aws community", "aws knowledge center"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── Networking (additional) ───────────────────────────────────────────────
+    {
+        "name": "VPC IP Address Manager (IPAM)",
+        "category": "Networking",
+        "keywords": ["amazon vpc ipam", "vpc ipam", "ip address manager", "ip address management"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "Network Manager",
+        "category": "Networking",
+        "keywords": ["aws network manager", "network manager", "global network", "transit gateway network manager"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "Route 53 Resolver",
+        "category": "Networking",
+        "keywords": ["amazon route 53 resolver", "route 53 resolver", "dns resolver", "hybrid dns"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "CloudFront Functions",
+        "category": "Networking",
+        "keywords": ["cloudfront functions", "amazon cloudfront functions", "edge functions"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── Developer Tools (additional) ──────────────────────────────────────────
+    {
+        "name": "CodeCatalyst",
+        "category": "DevOps",
+        "keywords": ["amazon codecatalyst", "codecatalyst", "unified development platform", "dev environment"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/devops/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Application Composer",
+        "category": "DevOps",
+        "keywords": ["aws application composer", "application composer", "visual serverless composer", "infrastructure visual design"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "Cloud Control API",
+        "category": "DevOps",
+        "keywords": ["aws cloud control api", "cloud control api", "cloud control", "resource model api"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── Media Services (additional) ───────────────────────────────────────────
+    {
+        "name": "Deadline Cloud",
+        "category": "Media Services",
+        "keywords": ["aws deadline cloud", "deadline cloud", "render farm", "3d rendering cloud"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/media/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Elemental MediaStore",
+        "category": "Media Services",
+        "keywords": ["aws elemental mediastore", "elemental mediastore", "media origin", "live video origin"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/media/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Elemental Link",
+        "category": "Media Services",
+        "keywords": ["aws elemental link", "elemental link", "live video contribution"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/media/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── IoT (additional) ──────────────────────────────────────────────────────
+    {
+        "name": "IoT Events",
+        "category": "IoT",
+        "keywords": ["aws iot events", "iot events", "iot event detection"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/iot/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "IoT Device Defender",
+        "category": "IoT",
+        "keywords": ["aws iot device defender", "iot device defender", "iot security audit"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/iot/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── End User Computing (additional) ───────────────────────────────────────
+    {
+        "name": "WorkSpaces Thin Client",
+        "category": "End User Computing",
+        "keywords": ["amazon workspaces thin client", "workspaces thin client", "thin client"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "WorkSpaces Personal",
+        "category": "End User Computing",
+        "keywords": ["amazon workspaces personal", "workspaces personal", "virtual desktop personal"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "WorkSpaces Pools",
+        "category": "End User Computing",
+        "keywords": ["amazon workspaces pools", "workspaces pools", "non-persistent virtual desktop"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "DCV (NICE DCV)",
+        "category": "End User Computing",
+        "keywords": ["amazon dcv", "nice dcv", "dcv", "high performance remote display"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── Observability ─────────────────────────────────────────────────────────
+    {
+        "name": "Managed Grafana",
+        "category": "Management & Governance",
+        "keywords": ["amazon managed grafana", "managed grafana", "grafana", "grafana workspace"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/mt/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Managed Service for Prometheus",
+        "category": "Management & Governance",
+        "keywords": ["amazon managed service for prometheus", "amazon prometheus", "managed prometheus", "amp"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/mt/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Distro for OpenTelemetry (ADOT)",
+        "category": "Management & Governance",
+        "keywords": ["aws distro for opentelemetry", "adot", "opentelemetry", "aws otel"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/mt/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Database (additional) ─────────────────────────────────────────────────
+    {
+        "name": "Neptune Analytics",
+        "category": "Database",
+        "keywords": ["amazon neptune analytics", "neptune analytics", "graph analytics", "vector graph"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/database/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Timestream for InfluxDB",
+        "category": "Database",
+        "keywords": ["amazon timestream for influxdb", "timestream influxdb", "managed influxdb"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/database/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "RDS Custom",
+        "category": "Database",
+        "keywords": ["amazon rds custom", "rds custom", "custom database environment"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/database/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "ElastiCache Serverless",
+        "category": "Database",
+        "keywords": ["amazon elasticache serverless", "elasticache serverless"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/database/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Migration (additional) ────────────────────────────────────────────────
+    {
+        "name": "Migration Evaluator",
+        "category": "Migration & Transfer",
+        "keywords": ["aws migration evaluator", "migration evaluator", "tso logic", "cloud migration business case"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── Game Tech (additional) ────────────────────────────────────────────────
+    {
+        "name": "GameLift Streams",
+        "category": "Game Tech",
+        "keywords": ["amazon gamelift streams", "gamelift streams", "cloud game streaming"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/gametech/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Marketplace ───────────────────────────────────────────────────────────
+    {
+        "name": "AWS Marketplace",
+        "category": "Commerce",
+        "keywords": ["aws marketplace", "marketplace", "third-party software"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/awsmarketplace/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Edge / Simulation ─────────────────────────────────────────────────────
+    {
+        "name": "SimSpace Weaver",
+        "category": "Compute",
+        "keywords": ["aws simspace weaver", "simspace weaver", "spatial simulation", "large-scale simulation"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── Containers (additional) ───────────────────────────────────────────────
+    {
+        "name": "EKS Distro",
+        "category": "Containers",
+        "keywords": ["amazon eks distro", "eks distro", "eks-d", "kubernetes distribution"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/containers/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "ECR Public",
+        "category": "Containers",
+        "keywords": ["amazon ecr public", "ecr public", "public container registry", "public ecr gallery"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/containers/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Storage (additional) ──────────────────────────────────────────────────
+    {
+        "name": "S3 Express One Zone",
+        "category": "Storage",
+        "keywords": ["amazon s3 express one zone", "s3 express one zone", "high performance s3", "single-zone s3"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/storage/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "S3 on Outposts",
+        "category": "Storage",
+        "keywords": ["amazon s3 on outposts", "s3 on outposts", "on-premises s3"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/storage/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Elastic File System One Zone",
+        "category": "Storage",
+        "keywords": ["amazon efs one zone", "efs one zone", "single-az efs"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/storage/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Quantum Computing ─────────────────────────────────────────────────────
+    {
+        "name": "Quantum Solutions Lab",
+        "category": "Quantum Computing",
+        "keywords": ["aws quantum solutions lab", "quantum solutions lab", "quantum computing consulting"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── Analytics (from official AWS docs) ────────────────────────────────────
+    {
+        "name": "Data Firehose",
+        "category": "Analytics",
+        "keywords": ["amazon data firehose", "data firehose", "kinesis firehose", "firehose delivery stream"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Managed Service for Apache Flink",
+        "category": "Analytics",
+        "keywords": ["amazon managed service for apache flink", "managed apache flink", "kinesis data analytics", "apache flink"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Data Pipeline",
+        "category": "Analytics",
+        "keywords": ["aws data pipeline", "data pipeline", "etl pipeline"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "OpenSearch Serverless",
+        "category": "Analytics",
+        "keywords": ["amazon opensearch serverless", "opensearch serverless", "serverless opensearch"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Redshift Serverless",
+        "category": "Analytics",
+        "keywords": ["amazon redshift serverless", "redshift serverless"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/big-data/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── ML & AI (from official AWS docs) ──────────────────────────────────────
+    {
+        "name": "SageMaker HyperPod",
+        "category": "ML & AI",
+        "keywords": ["amazon sagemaker hyperpod", "sagemaker hyperpod", "hyperpod", "distributed training cluster"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SageMaker Data Wrangler",
+        "category": "ML & AI",
+        "keywords": ["amazon sagemaker data wrangler", "sagemaker data wrangler", "data wrangler", "feature engineering"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SageMaker Feature Store",
+        "category": "ML & AI",
+        "keywords": ["amazon sagemaker feature store", "sagemaker feature store", "feature store", "ml features"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SageMaker Clarify",
+        "category": "ML & AI",
+        "keywords": ["amazon sagemaker clarify", "sagemaker clarify", "model explainability", "bias detection"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SageMaker Autopilot",
+        "category": "ML & AI",
+        "keywords": ["amazon sagemaker autopilot", "sagemaker autopilot", "automl"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SageMaker Pipelines",
+        "category": "ML & AI",
+        "keywords": ["amazon sagemaker pipelines", "sagemaker pipelines", "ml pipeline", "mlops pipeline"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SageMaker Edge",
+        "category": "ML & AI",
+        "keywords": ["amazon sagemaker edge", "sagemaker edge manager", "ml at the edge"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "SageMaker Studio Lab",
+        "category": "ML & AI",
+        "keywords": ["amazon sagemaker studio lab", "sagemaker studio lab", "ml sandbox", "jupyter free ml"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Transcribe Call Analytics",
+        "category": "ML & AI",
+        "keywords": ["amazon transcribe call analytics", "transcribe call analytics", "contact center ai", "call transcription"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "PartyRock",
+        "category": "ML & AI",
+        "keywords": ["amazon partyrock", "partyrock", "bedrock playground", "ai app builder"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Deep Learning AMIs",
+        "category": "ML & AI",
+        "keywords": ["aws deep learning amis", "deep learning ami", "dlami", "deep learning container"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/machine-learning/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Compute (from official AWS docs) ──────────────────────────────────────
+    {
+        "name": "VMware Cloud on AWS",
+        "category": "Compute",
+        "keywords": ["vmware cloud on aws", "vmware cloud aws", "vmc on aws", "sddc"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/compute/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Database (from official AWS docs) ─────────────────────────────────────
+    {
+        "name": "RDS for Db2",
+        "category": "Database",
+        "keywords": ["amazon rds for db2", "rds db2", "db2 on rds"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/database/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Front-End Web & Mobile ────────────────────────────────────────────────
+    {
+        "name": "Location Service",
+        "category": "Front-End Web & Mobile",
+        "keywords": ["amazon location service", "location service", "maps api", "geolocation", "geofencing"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/mobile/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Amplify Studio",
+        "category": "Front-End Web & Mobile",
+        "keywords": ["aws amplify studio", "amplify studio", "visual app builder"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/mobile/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Amplify Hosting",
+        "category": "Front-End Web & Mobile",
+        "keywords": ["aws amplify hosting", "amplify hosting", "static site hosting", "fullstack hosting"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/mobile/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+
+    # ── Customer Enablement ───────────────────────────────────────────────────
+    {
+        "name": "Managed Services (AMS)",
+        "category": "Customer Enablement",
+        "keywords": ["aws managed services", "aws ams", "managed cloud operations"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "re:Post Private",
+        "category": "Customer Enablement",
+        "keywords": ["aws re:post private", "repost private", "private community"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+    {
+        "name": "IQ",
+        "category": "Customer Enablement",
+        "keywords": ["aws iq", "aws expert help", "aws certified expert"],
+        "feeds": [WHATS_NEW_FEED],
+    },
+
+    # ── Business Applications (additional from docs) ───────────────────────────
+    {
+        "name": "Connect Voice ID",
+        "category": "Business Applications",
+        "keywords": ["amazon connect voice id", "connect voice id", "voice biometrics", "caller authentication"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/contact-center/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Connect Contact Lens",
+        "category": "Business Applications",
+        "keywords": ["amazon connect contact lens", "contact lens", "contact center analytics", "call sentiment"],
+        "feeds": [
+            "https://aws.amazon.com/blogs/contact-center/feed/",
+            WHATS_NEW_FEED,
+        ],
+    },
+    {
+        "name": "Honeycode",
+        "category": "Business Applications",
+        "keywords": ["amazon honeycode", "honeycode", "no-code app builder"],
+        "feeds": [WHATS_NEW_FEED],
     },
 ]
 

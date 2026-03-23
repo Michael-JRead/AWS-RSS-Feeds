@@ -11,7 +11,15 @@
       "Bash(pip install:*)",
       "Bash(python -c \"import streamlit; import os; print\\(os.path.dirname\\(streamlit.__file__\\)\\)\")",
       "Bash(python -m streamlit --version)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(python -c \":*)",
+      "Bash(python -c \"import cryptography; print\\(''cryptography available''\\)\")",
+      "Bash(python -c \"import ssl; print\\(ssl.OPENSSL_VERSION\\)\")",
+      "Bash(where openssl:*)",
+      "Bash(\"C:\\\\Program Files\\\\Git\\\\mingw64\\\\bin\\\\openssl.exe\" req -x509 -newkey rsa:4096 -keyout \"C:\\\\Users\\\\mjrma\\\\OneDrive\\\\Documents\\\\Github Repos\\\\AWS RSS Feeds\\\\.streamlit\\\\localhost.key\" -out \"C:\\\\Users\\\\mjrma\\\\OneDrive\\\\Documents\\\\Github Repos\\\\AWS RSS Feeds\\\\.streamlit\\\\localhost.crt\" -days 3650 -nodes -subj \"/C=US/ST=Local/L=Local/O=AWSRSSDigest/CN=localhost\" -addext \"subjectAltName=DNS:localhost,IP:127.0.0.1\")",
+      "Bash($env:PATH = \"C:\\\\Program Files\\\\Git\\\\mingw64\\\\bin;\" + $env:PATH)",
+      "Bash(openssl req:*)",
+      "Bash(1:*)"
     ]
   }
 }
