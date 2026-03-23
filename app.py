@@ -538,7 +538,7 @@ with tab5:
         st.markdown(f"### Preview ({total_item_count(results)} items)")
 
         if not results:
-            st.info("No items found for the selected services in the last {days_back} days. Try increasing the 'Days back' slider.")
+            st.info(f"No items found for the selected services in the last {days_back} days. Try increasing the 'Days back' slider.")
         else:
             for service_name, items in results.items():
                 with st.expander(

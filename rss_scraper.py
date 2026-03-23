@@ -10,6 +10,7 @@ Responsibilities:
 
 from __future__ import annotations
 
+import re
 import time
 from datetime import datetime, timezone, timedelta
 from typing import Any
@@ -66,12 +67,54 @@ def fetch_feed(url: str, timeout: int = 15) -> list[dict]:
         return []
 
 
-def filter_by_keywords(items: list[dict], keywords: list[str]) -> list[dict]:
-    """Keep only items whose title contains at least one keyword (title-only for precision).
+def _derive_name_terms(service_name: str) -> list[str]:
+    """Derive title-match terms from a service's display name.
 
-    Matching against the title only (not the summary) ensures results are genuinely
-    about the selected service. AWS What's New titles always name the primary service
-    (e.g. "AWS Lambda now supports..."), so body-only mentions are intentionally excluded.
+    Parses the name field into the meaningful parts a feed title would contain.
+    AWS What's New titles always lead with the service name, so we match only
+    against the name itself — not broad descriptive keywords.
+
+    Examples
+    --------
+    "EC2 (Elastic Compute Cloud)"          → ["ec2", "elastic compute cloud"]
+    "Lambda"                                → ["lambda"]
+    "S3 (Simple Storage Service)"           → ["s3", "simple storage service"]
+    "AWS Config"                            → ["aws config", "config"]
+    "IAM (Identity & Access Management)"    → ["iam", "identity & access management",
+                                               "identity and access management"]
+    "MQ (Amazon MQ)"                        → ["mq", "amazon mq"]
+    "IoT Core"                              → ["iot core"]
+    """
+    terms: set[str] = set()
+
+    # --- Text inside parentheses becomes its own term ---
+    for paren_content in re.findall(r'\(([^)]+)\)', service_name):
+        t = paren_content.strip().lower()
+        terms.add(t)
+        if "&" in t:
+            terms.add(t.replace("&", "and"))  # "identity and access management"
+
+    # --- Main name = everything before the first '(' ---
+    main = re.sub(r'\s*\(.*', "", service_name).strip()
+    if main:
+        m = main.lower()
+        terms.add(m)
+        # If prefixed with "amazon " or "aws ", also add the bare name
+        for prefix in ("amazon ", "aws "):
+            if m.startswith(prefix):
+                terms.add(m[len(prefix):])
+                break
+
+    return [t for t in sorted(terms) if t]
+
+
+def filter_by_keywords(items: list[dict], keywords: list[str]) -> list[dict]:
+    """Keep only items whose title contains at least one of the given terms.
+
+    Called with name-derived terms (from _derive_name_terms) so that matches
+    reflect the actual service name appearing in the title, not loose keywords.
+    AWS What's New titles always name the primary service
+    (e.g. "AWS Lambda now supports..."), so this gives precise, relevant results.
     """
     lower_kw = [kw.lower() for kw in keywords]
 
@@ -127,9 +170,10 @@ def scrape_services(
                 if whats_new_cache is None:
                     whats_new_cache = fetch_feed(WHATS_NEW_FEED)
                 raw = whats_new_cache
-                # Filter by keywords unless the service explicitly covers all
+                # Filter by service name terms unless the service covers all feeds
                 if service["name"] not in ("What's New (All Services)", "AWS News Blog (All)"):
-                    raw = filter_by_keywords(raw, service["keywords"])
+                    name_terms = _derive_name_terms(service["name"])
+                    raw = filter_by_keywords(raw, name_terms)
             else:
                 raw = fetch_feed(feed_url)
 
