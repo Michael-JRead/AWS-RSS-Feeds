@@ -67,11 +67,16 @@ def fetch_feed(url: str, timeout: int = 15) -> list[dict]:
 
 
 def filter_by_keywords(items: list[dict], keywords: list[str]) -> list[dict]:
-    """Keep only items whose title or summary contains at least one keyword."""
+    """Keep only items whose title contains at least one keyword (title-only for precision).
+
+    Matching against the title only (not the summary) ensures results are genuinely
+    about the selected service. AWS What's New titles always name the primary service
+    (e.g. "AWS Lambda now supports..."), so body-only mentions are intentionally excluded.
+    """
     lower_kw = [kw.lower() for kw in keywords]
 
     def matches(item: dict) -> bool:
-        haystack = (item["title"] + " " + item["summary"]).lower()
+        haystack = item["title"].lower()
         return any(kw in haystack for kw in lower_kw)
 
     return [i for i in items if matches(i)]

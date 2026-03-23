@@ -240,6 +240,36 @@ def send_email(
             server.sendmail(username, recipients, msg.as_string())
 
 
+def open_in_outlook(html_body: str, recipients: list[str], subject: str) -> None:
+    """Open a pre-filled Outlook draft using Windows COM automation (win32com).
+
+    Requires Microsoft Outlook to be installed and pywin32 (pip install pywin32).
+    Opens the draft for the user to review — does NOT send automatically.
+
+    Args:
+        html_body:  Full HTML string for the email body.
+        recipients: List of recipient email addresses.
+        subject:    Email subject line.
+
+    Raises:
+        RuntimeError: If pywin32 is not installed.
+        Exception:    If Outlook is not installed or COM dispatch fails.
+    """
+    try:
+        import win32com.client  # type: ignore
+    except ImportError:
+        raise RuntimeError(
+            "pywin32 is not installed. Run: pip install pywin32"
+        )
+
+    outlook = win32com.client.Dispatch("Outlook.Application")
+    mail = outlook.CreateItem(0)       # 0 = olMailItem
+    mail.Subject = subject
+    mail.HTMLBody = html_body
+    mail.To = "; ".join(recipients)
+    mail.Display(False)                # False = non-modal, keeps Outlook visible
+
+
 def test_smtp_connection(smtp_config: dict) -> tuple[bool, str]:
     """
     Test SMTP credentials without sending a message.

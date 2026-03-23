@@ -12,7 +12,7 @@ import streamlit as st
 from aws_services import AWS_SERVICES, CATEGORIES, SERVICE_NAMES
 from config import load_config, save_config, update_config
 from rss_scraper import scrape_services, total_item_count
-from email_sender import build_html_email, send_email, build_subject, test_smtp_connection
+from email_sender import build_html_email, send_email, build_subject, test_smtp_connection, open_in_outlook
 from scheduler import apply_schedule, get_next_run, start_scheduler, get_scheduler
 
 # ---------------------------------------------------------------------------
@@ -438,25 +438,32 @@ with tab5:
     recipients = cfg.get("recipients", [])
     days_back = cfg.get("days_back", 7)
 
-    # Validation summary
-    issues = []
+    # Validation — base checks (services + recipients, no SMTP required)
+    base_issues = []
     if not selected_services and not custom_feeds:
-        issues.append("No services selected (Tab 1)")
+        base_issues.append("No services selected (Tab 1)")
     if not recipients:
-        issues.append("No recipients added (Tab 2)")
-    if not cfg["smtp"].get("host"):
-        issues.append("SMTP not configured (Tab 3)")
-    if not cfg["smtp"].get("username"):
-        issues.append("SMTP username missing (Tab 3)")
-    if not cfg["smtp"].get("password"):
-        issues.append("SMTP password missing (Tab 3)")
+        base_issues.append("No recipients added (Tab 2)")
 
-    if issues:
-        st.warning("**Before sending, complete the following:**\n" + "\n".join(f"- {i}" for i in issues))
+    # Additional SMTP-specific checks
+    smtp_issues = list(base_issues)
+    if not cfg["smtp"].get("host"):
+        smtp_issues.append("SMTP not configured (Tab 3)")
+    if not cfg["smtp"].get("username"):
+        smtp_issues.append("SMTP username missing (Tab 3)")
+    if not cfg["smtp"].get("password"):
+        smtp_issues.append("SMTP password missing (Tab 3)")
+
+    if smtp_issues and base_issues:
+        # Both SMTP and base issues — show combined warning
+        st.warning("**Before sending, complete the following:**\n" + "\n".join(f"- {i}" for i in smtp_issues))
+    elif smtp_issues:
+        # Only SMTP missing — show softer note so Outlook path is still obvious
+        st.info("💡 SMTP not configured — you can still use **Open in Outlook** to send via your local Outlook client.")
     else:
         st.success("All settings look good — ready to fetch and send!")
 
-    col_f1, col_f2 = st.columns([1, 1])
+    col_f1, col_f2, col_f3 = st.columns([1, 1, 1])
 
     # ── Fetch preview ────────────────────────────────────────────────────────
     with col_f1:
@@ -470,16 +477,27 @@ with tab5:
                 total = total_item_count(results)
                 st.success(f"Fetched **{total} total item{'s' if total != 1 else ''}** across {len(results)} service{'s' if len(results) != 1 else ''}.")
 
-    # ── Send now ─────────────────────────────────────────────────────────────
+    # ── Send via SMTP ────────────────────────────────────────────────────────
     with col_f2:
         send_btn = st.button(
-            "📨 Send Email Now",
+            "📨 Send via SMTP",
             use_container_width=True,
             type="primary",
-            disabled=bool(issues),
+            disabled=bool(smtp_issues),
+            help="Send email directly using SMTP credentials configured in Tab 3.",
         )
 
-    if send_btn and not issues:
+    # ── Open in Outlook ──────────────────────────────────────────────────────
+    with col_f3:
+        outlook_btn = st.button(
+            "📧 Open in Outlook",
+            use_container_width=True,
+            type="secondary",
+            disabled=bool(base_issues),
+            help="Launch a pre-filled Outlook draft on this computer. No SMTP setup required.",
+        )
+
+    if send_btn and not smtp_issues:
         with st.spinner("Fetching feeds and sending email..."):
             try:
                 results = scrape_services(selected_services, custom_feeds, days_back)
@@ -494,6 +512,24 @@ with tab5:
                 )
             except Exception as e:
                 st.error(f"❌ Failed to send email: {e}")
+
+    if outlook_btn and not base_issues:
+        with st.spinner("Building digest and opening Outlook draft..."):
+            try:
+                results = scrape_services(selected_services, custom_feeds, days_back)
+                st.session_state["preview_results"] = results
+                html = build_html_email(results, days_back)
+                subject = build_subject(cfg.get("subject", "AWS Service Updates — {date}"))
+                open_in_outlook(html, recipients, subject)
+                total = total_item_count(results)
+                st.info(
+                    f"📧 Outlook draft opened with **{total} update{'s' if total != 1 else ''}** across "
+                    f"{len(results)} service{'s' if len(results) != 1 else ''} — review and send from Outlook."
+                )
+            except RuntimeError as e:
+                st.error(f"❌ {e}")
+            except Exception as e:
+                st.error(f"❌ Could not open Outlook: {e}")
 
     # ── Preview results ───────────────────────────────────────────────────────
     if "preview_results" in st.session_state:
