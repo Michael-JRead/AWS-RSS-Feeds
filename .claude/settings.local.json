@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:aws.amazon.com)",
+      "WebFetch(domain:www.netcomlearning.com)",
+      "WebFetch(domain:www.hava.io)",
+      "WebFetch(domain:www.economize.cloud)",
+      "WebFetch(domain:www.leskoff.com)",
+      "Bash(pip --version)",
+      "Bash(pip install:*)",
+      "Bash(python -c \"import streamlit; import os; print\\(os.path.dirname\\(streamlit.__file__\\)\\)\")",
+      "Bash(python -m streamlit --version)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
