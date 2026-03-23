@@ -24,28 +24,28 @@ _HTML_TEMPLATE = """\
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>AWS Service Digest</title>
 </head>
-<body style="margin:0;padding:0;background:#f0f2f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">
+<body style="margin:0;padding:0;background:#0d1117;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;">
 
 <!-- Wrapper -->
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f2f5;">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#0d1117;">
 <tr><td align="center" style="padding:24px 16px;">
 
   <!-- Email card -->
-  <table width="600" cellpadding="0" cellspacing="0" border="0"
-         style="max-width:600px;width:100%;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.10);">
+  <table width="620" cellpadding="0" cellspacing="0" border="0"
+         style="max-width:620px;width:100%;background:#161b22;border-radius:12px;overflow:hidden;border:1px solid #30363d;">
 
     <!-- HEADER -->
     <tr>
-      <td style="background:linear-gradient(135deg,#232f3e 0%,#1a242e 100%);padding:32px 36px;">
+      <td style="background:#0d1117;padding:30px 36px;border-bottom:3px solid #ff9900;">
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <td>
-              <div style="color:#ff9900;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">&#9729; AWS Service Digest</div>
-              <div style="color:#ffffff;font-size:26px;font-weight:700;line-height:1.2;">What's New in AWS</div>
-              <div style="color:#aab3bf;font-size:13px;margin-top:6px;">Covering the last {days_back} day{days_plural}</div>
+              <div style="color:#ff9900;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">&#9729; AWS SERVICE DIGEST</div>
+              <div style="color:#e6edf3;font-size:26px;font-weight:700;line-height:1.2;">What's New in AWS</div>
+              <div style="color:#8b949e;font-size:13px;margin-top:6px;">Covering the last {days_back} day{days_plural}</div>
             </td>
             <td align="right" valign="top" style="white-space:nowrap;">
-              <div style="background:#ff9900;color:#fff;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;display:inline-block;">{date_str}</div>
+              <div style="background:#ff9900;color:#0d1117;font-size:12px;font-weight:700;padding:6px 14px;border-radius:20px;display:inline-block;">{date_str}</div>
             </td>
           </tr>
         </table>
@@ -54,25 +54,25 @@ _HTML_TEMPLATE = """\
 
     <!-- SUMMARY BAR -->
     <tr>
-      <td style="background:#ff9900;padding:12px 36px;">
-        <span style="color:#fff;font-size:14px;font-weight:600;">{total_updates} update{total_plural} across {service_count} service{service_plural}</span>
+      <td style="background:#ff9900;padding:10px 36px;">
+        <span style="color:#0d1117;font-size:14px;font-weight:700;">{total_updates} update{total_plural} across {service_count} service{service_plural}</span>
       </td>
     </tr>
 
     <!-- SERVICE BLOCKS -->
     <tr>
-      <td style="padding:28px 36px 8px;">
+      <td style="padding:24px 28px 12px;">
         {service_blocks}
       </td>
     </tr>
 
     <!-- FOOTER -->
     <tr>
-      <td style="background:#f8f9fa;padding:24px 36px;border-top:1px solid #e9ecef;">
+      <td style="background:#0d1117;padding:20px 36px;border-top:1px solid #30363d;">
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
-            <td style="color:#adb5bd;font-size:11px;line-height:1.8;">
-              <strong style="color:#6c757d;">AWS RSS Digest</strong> &nbsp;·&nbsp; Generated {generated_at} UTC<br>
+            <td style="color:#6e7681;font-size:11px;line-height:1.8;">
+              <strong style="color:#8b949e;">AWS RSS Digest</strong> &nbsp;·&nbsp; Generated {generated_at} UTC<br>
               <a href="https://aws.amazon.com/about-aws/whats-new/" style="color:#ff9900;text-decoration:none;">AWS What's New</a>
               &nbsp;·&nbsp;
               <a href="https://aws.amazon.com/blogs/aws/" style="color:#ff9900;text-decoration:none;">AWS Blog</a>
@@ -96,17 +96,17 @@ _HTML_TEMPLATE = """\
 _SERVICE_BLOCK = """\
 <!-- Service: {service_name} -->
 <table width="100%" cellpadding="0" cellspacing="0" border="0"
-       style="margin-bottom:24px;border-radius:8px;overflow:hidden;border:1px solid #e9ecef;">
+       style="margin-bottom:20px;border-radius:8px;overflow:hidden;border:1px solid #30363d;">
   <!-- Service header -->
   <tr>
-    <td style="background:#232f3e;padding:12px 18px;">
+    <td style="background:#21262d;padding:11px 18px;">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td>
-            <span style="color:#ff9900;font-size:15px;font-weight:700;">{service_name}</span>
+            <span style="color:#ff9900;font-size:14px;font-weight:700;letter-spacing:0.3px;">{service_name}</span>
           </td>
           <td align="right">
-            <span style="background:#ff9900;color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:12px;">{item_count} update{plural}</span>
+            <span style="background:#ff9900;color:#0d1117;font-size:11px;font-weight:700;padding:2px 10px;border-radius:12px;">{item_count} update{plural}</span>
           </td>
         </tr>
       </table>
@@ -114,7 +114,7 @@ _SERVICE_BLOCK = """\
   </tr>
   <!-- Items -->
   <tr>
-    <td style="background:#ffffff;">
+    <td style="background:#161b22;">
       {item_rows}
     </td>
   </tr>
@@ -123,19 +123,19 @@ _SERVICE_BLOCK = """\
 
 _ITEM_ROW = """\
 <table width="100%" cellpadding="0" cellspacing="0" border="0"
-       style="border-bottom:1px solid #f0f2f5;">
+       style="border-bottom:1px solid #21262d;">
   <tr>
     <td style="width:4px;background:#ff9900;"></td>
-    <td style="padding:16px 20px;">
+    <td style="padding:16px 18px;">
       <!-- Title -->
-      <a href="{link}" style="color:#1a1a2e;font-size:15px;font-weight:700;text-decoration:none;line-height:1.4;display:block;margin-bottom:6px;">{title}</a>
+      <a href="{link}" style="color:#e6edf3;font-size:14px;font-weight:700;text-decoration:none;line-height:1.4;display:block;margin-bottom:6px;">{title}</a>
       <!-- Date badge -->
-      <span style="display:inline-block;background:#f0f2f5;color:#6c757d;font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px;margin-bottom:10px;">{date_str}</span>
+      <span style="display:inline-block;background:#21262d;color:#8b949e;font-size:11px;font-weight:600;padding:2px 8px;border-radius:8px;margin-bottom:10px;">{date_str}</span>
       <!-- Summary -->
-      <div style="color:#495057;font-size:13px;line-height:1.6;margin-bottom:12px;">{summary}</div>
+      <div style="color:#8b949e;font-size:13px;line-height:1.6;margin-bottom:12px;">{summary}</div>
       <!-- Read more pill button -->
       <a href="{link}"
-         style="display:inline-block;background:#ff9900;color:#ffffff;font-size:12px;font-weight:700;padding:6px 16px;border-radius:20px;text-decoration:none;letter-spacing:0.3px;">
+         style="display:inline-block;background:#ff9900;color:#0d1117;font-size:12px;font-weight:700;padding:5px 16px;border-radius:20px;text-decoration:none;letter-spacing:0.3px;">
         Read more &rarr;
       </a>
     </td>
@@ -146,7 +146,7 @@ _ITEM_ROW = """\
 _NO_ITEMS_ROW = """\
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr>
-    <td style="padding:16px 20px;color:#adb5bd;font-size:13px;font-style:italic;text-align:center;">
+    <td style="padding:16px 20px;color:#6e7681;font-size:13px;font-style:italic;text-align:center;">
       No updates in this time window.
     </td>
   </tr>
